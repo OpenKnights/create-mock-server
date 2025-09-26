@@ -254,43 +254,6 @@ const server = createMockServer({
 
 ## 🧪 Testing Integration
 
-### Jest Example
-
-```typescript
-import { createMockServer } from 'create-mock-server'
-import type { MockServer } from 'create-mock-server'
-
-describe('API Tests', () => {
-  let server: MockServer
-  
-  beforeAll(async () => {
-    server = createMockServer({
-      routes: [
-        {
-          url: '/health',
-          method: 'get',
-          handler: async () => ({ status: 'ok' })
-        }
-      ],
-      port: 0 // Use random available port
-    })
-    
-    await server.listen()
-  })
-  
-  afterAll(async () => {
-    await server.close()
-  })
-  
-  test('should return health status', async () => {
-    const response = await fetch(`${server.url}/health`)
-    const data = await response.json()
-    
-    expect(data).toEqual({ status: 'ok' })
-  })
-})
-```
-
 ### Vitest Example
 
 ```typescript

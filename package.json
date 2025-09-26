@@ -17,6 +17,9 @@
     "url": "git+https://github.com/OpenKnights/create-mock-server.git"
   },
   "author": "king-3 <w2196592083@gmail.com>",
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,9 +30,6 @@
       "import": "./dist/index.js"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "test": "vitest",
     "build": "tsdown --clear --dts",

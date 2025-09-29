@@ -47,10 +47,14 @@ const server = createMockServer({
     },
     {
       url: '/api/users/:id',
-      method: 'get', 
+      method: 'get',
       handler: async (event) => {
         const id = getRouterParam(event, 'id')
-        return { id: parseInt(id), name: `User ${id}`, email: `user${id}@example.com` }
+        return {
+          id: Number.parseInt(id),
+          name: `User ${id}`,
+          email: `user${id}@example.com`
+        }
       }
     }
   ],
@@ -123,14 +127,18 @@ interface MockServer {
 ### Using Middlewares
 
 ```typescript
-import { createMockServer, createMiddleware } from 'create-mock-server'
-import { setHeader, readBody } from 'h3'
+import { createMiddleware, createMockServer } from 'create-mock-server'
+import { readBody, setHeader } from 'h3'
 
 const corsMiddleware = createMiddleware(
   async (event) => {
     setHeader(event, 'Access-Control-Allow-Origin', '*')
     setHeader(event, 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-    setHeader(event, 'Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    setHeader(
+      event,
+      'Access-Control-Allow-Headers',
+      'Content-Type, Authorization'
+    )
   },
   { name: 'cors', isAfter: false }
 )
@@ -161,7 +169,7 @@ const server = createMockServer({
 ### Route Prefixes
 
 ```typescript
-import { createMockServer, addRoutesPrefix } from 'create-mock-server'
+import { addRoutesPrefix, createMockServer } from 'create-mock-server'
 
 const routes = [
   {
@@ -171,7 +179,7 @@ const routes = [
   },
   {
     url: '/posts',
-    method: 'get' as const, 
+    method: 'get' as const,
     handler: async () => ({ posts: [] })
   }
 ]
@@ -179,7 +187,7 @@ const routes = [
 // Method 1: Using prefix option
 const server1 = createMockServer({
   routes,
-  prefix: '/api/v1'  // All routes will be prefixed with /api/v1
+  prefix: '/api/v1' // All routes will be prefixed with /api/v1
 })
 
 // Method 2: Using utility function
@@ -202,9 +210,9 @@ const server = createMockServer({
       handler: async (event) => {
         const id = getRouterParam(event, 'id')
         const query = getQuery(event)
-        
+
         return {
-          user: { id: parseInt(id), name: `User ${id}` },
+          user: { id: Number.parseInt(id), name: `User ${id}` },
           query
         }
       }
@@ -214,7 +222,7 @@ const server = createMockServer({
       method: 'post',
       handler: async (event) => {
         const userData = await readBody(event)
-        
+
         return {
           message: 'User created successfully',
           user: { id: Date.now(), ...userData }
@@ -237,15 +245,15 @@ const server = createMockServer({
       method: 'get',
       handler: async (event) => {
         const id = getRouterParam(event, 'id')
-        
+
         if (id === '404') {
           throw createError({
             statusCode: 404,
             statusMessage: 'User not found'
           })
         }
-        
-        return { id: parseInt(id), name: `User ${id}` }
+
+        return { id: Number.parseInt(id), name: `User ${id}` }
       }
     }
   ]
@@ -257,12 +265,12 @@ const server = createMockServer({
 ### Vitest Example
 
 ```typescript
-import { beforeAll, afterAll, describe, it, expect } from 'vitest'
 import { createMockServer } from 'create-mock-server'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 describe('Mock Server Tests', () => {
   let server: MockServer
-  
+
   beforeAll(async () => {
     server = createMockServer({
       routes: [
@@ -274,15 +282,15 @@ describe('Mock Server Tests', () => {
     })
     await server.listen()
   })
-  
+
   afterAll(async () => {
     await server.close()
   })
-  
+
   it('should handle requests correctly', async () => {
     const response = await fetch(`${server.url}/api/test`)
     const data = await response.json()
-    
+
     expect(data.message).toBe('Hello from mock server!')
   })
 })
@@ -303,7 +311,7 @@ const routes = [
 ]
 
 const prefixedRoutes = addRoutesPrefix(routes, '/api/v1')
-// Result: 
+// Result:
 // [
 //   { url: '/api/v1/users', method: 'get', handler: getUsersHandler },
 //   { url: '/api/v1/posts', method: 'get', handler: getPostsHandler }
@@ -337,7 +345,7 @@ import { createMockServer } from 'create-mock-server'
 import { getRouterParam, readBody } from 'h3'
 
 // Simulate a simple user database
-let users = [
+const users = [
   { id: 1, name: 'John Doe', email: 'john@example.com' },
   { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
 ]
@@ -350,26 +358,26 @@ const server = createMockServer({
       method: 'get',
       handler: async () => ({ users })
     },
-    
+
     // Get user by ID
     {
       url: '/users/:id',
       method: 'get',
       handler: async (event) => {
-        const id = parseInt(getRouterParam(event, 'id'))
-        const user = users.find(u => u.id === id)
-        
+        const id = Number.parseInt(getRouterParam(event, 'id'))
+        const user = users.find((u) => u.id === id)
+
         if (!user) {
           throw createError({
             statusCode: 404,
             statusMessage: 'User not found'
           })
         }
-        
+
         return { user }
       }
     },
-    
+
     // Create new user
     {
       url: '/users',
@@ -377,51 +385,51 @@ const server = createMockServer({
       handler: async (event) => {
         const userData = await readBody(event)
         const newUser = {
-          id: Math.max(...users.map(u => u.id)) + 1,
+          id: Math.max(...users.map((u) => u.id)) + 1,
           ...userData
         }
-        
+
         users.push(newUser)
         return { user: newUser, message: 'User created successfully' }
       }
     },
-    
+
     // Update user
     {
       url: '/users/:id',
       method: 'put',
       handler: async (event) => {
-        const id = parseInt(getRouterParam(event, 'id'))
+        const id = Number.parseInt(getRouterParam(event, 'id'))
         const userData = await readBody(event)
-        const userIndex = users.findIndex(u => u.id === id)
-        
+        const userIndex = users.findIndex((u) => u.id === id)
+
         if (userIndex === -1) {
           throw createError({
             statusCode: 404,
             statusMessage: 'User not found'
           })
         }
-        
+
         users[userIndex] = { ...users[userIndex], ...userData }
         return { user: users[userIndex], message: 'User updated successfully' }
       }
     },
-    
+
     // Delete user
     {
       url: '/users/:id',
       method: 'delete',
       handler: async (event) => {
-        const id = parseInt(getRouterParam(event, 'id'))
-        const userIndex = users.findIndex(u => u.id === id)
-        
+        const id = Number.parseInt(getRouterParam(event, 'id'))
+        const userIndex = users.findIndex((u) => u.id === id)
+
         if (userIndex === -1) {
           throw createError({
             statusCode: 404,
             statusMessage: 'User not found'
           })
         }
-        
+
         users.splice(userIndex, 1)
         return { message: 'User deleted successfully' }
       }

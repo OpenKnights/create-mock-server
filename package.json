@@ -31,6 +31,7 @@
     }
   },
   "scripts": {
+    "dev": "tsx --watch playground/index.ts",
     "test": "vitest",
     "build": "tsdown --clear --dts",
     "lint": "eslint",
@@ -48,6 +49,7 @@
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "tsdown": "^0.15.4",
+    "tsx": "^4.20.6",
     "vitest": "^3.2.4"
   }
 }

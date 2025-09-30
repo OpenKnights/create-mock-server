@@ -31,7 +31,7 @@
     }
   },
   "scripts": {
-    "dev": "tsx --watch playground/index.ts",
+    "playground": "tsx --watch playground/index.ts",
     "test": "vitest",
     "build": "tsdown --clear --dts",
     "lint": "eslint",

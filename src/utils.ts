@@ -11,9 +11,9 @@ import type { MethodOption, Middleware } from './types'
  */
 export const isEmpty = (value: unknown): boolean => {
   if (typeof value === 'string' && value.trim() !== '') {
-    return true
-  } else {
     return false
+  } else {
+    return true
   }
 }
 

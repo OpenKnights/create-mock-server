@@ -85,7 +85,7 @@ export function createH3Router(
     return baseRouter
   } else {
     // Without prefix, create a simple H3 router directly
-    let h3Router = createRouter()
+    const h3Router = createRouter()
 
     // Configure all routes to the H3 router
     addRoutes(h3Router, routes)

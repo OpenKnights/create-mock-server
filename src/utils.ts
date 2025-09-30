@@ -5,7 +5,7 @@ import type { MethodOption, Middleware } from './types'
  * Checks if a string value is non-empty
  * @param value - The value to check
  * @returns Returns true if it's a non-empty string, otherwise false
- * 
+ *
  * @remarks
  * This function only validates string types, trimming whitespace before checking if empty
  */

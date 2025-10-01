@@ -33,7 +33,7 @@
   "scripts": {
     "playground": "tsx --watch playground/index.ts",
     "test": "vitest",
-    "build": "tsdown --clear --dts",
+    "build": "tsdown",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "prettier . --write",

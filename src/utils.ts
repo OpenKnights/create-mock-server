@@ -58,6 +58,8 @@ export function addRoutesPrefix(
     let prefixedUrl: string
     if (url === '/') {
       prefixedUrl = cleanPrefix
+    } else if (!url.startsWith('/')) {
+      prefixedUrl = `${cleanPrefix}/${url}`
     } else {
       prefixedUrl = `${cleanPrefix}${url}`
     }

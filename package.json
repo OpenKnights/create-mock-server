@@ -1,6 +1,6 @@
 {
   "name": "create-mock-server",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "this is mock server",
   "type": "module",
   "keywords": [
@@ -33,7 +33,7 @@
   "scripts": {
     "playground": "tsx --watch playground/index.ts",
     "test": "vitest",
-    "build": "tsdown --clear --dts",
+    "build": "tsdown",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "prettier . --write",
@@ -43,7 +43,8 @@
     "h3": "^1.15.4"
   },
   "devDependencies": {
-    "@king-3/eslint-config": "^1.0.6",
+    "@king-3/eslint-config": "^1.0.8",
+    "@king-3/prettier-config": "^1.0.2",
     "@types/node": "^24.5.2",
     "bumpp": "^10.2.3",
     "eslint": "^9.36.0",

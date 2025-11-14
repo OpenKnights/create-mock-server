@@ -2,10 +2,14 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["esnext"],
-    // , "DOM", "DOM.Iterable"
+    "lib": ["esnext","DOM","DOM.Iterable"],
+    "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "paths": {
+      // "#/*": ["./*"],
+      "#types/*": ["types/*"]
+    },
     "resolveJsonModule": true,
     "types": ["node"],
     "strict": true,
@@ -13,5 +17,5 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "eslint.config.js", "prettier.config.js"]
 }

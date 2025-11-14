@@ -30,8 +30,12 @@
       "import": "./dist/index.js"
     }
   },
+  "imports": {
+    "#/*": "./",
+    "#types/*": "./types/*"
+  },
   "scripts": {
-    "playground": "tsx --watch playground/index.ts",
+    "play": "npx play",
     "test": "vitest",
     "build": "tsdown",
     "lint": "eslint",
@@ -40,17 +44,19 @@
     "release": "bumpp && pnpm publish"
   },
   "dependencies": {
-    "h3": "^1.15.4"
+    "h3": "2.0.1-rc.5"
   },
   "devDependencies": {
-    "@king-3/eslint-config": "^1.0.8",
+    "@king-3/eslint-config": "^2.0.0",
+    "@king-3/play-tsx": "^1.2.0",
     "@king-3/prettier-config": "^1.0.2",
     "@types/node": "^24.5.2",
     "bumpp": "^10.2.3",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
-    "tsdown": "^0.15.4",
+    "tsdown": "^0.16.4",
     "tsx": "^4.20.6",
+    "unbuild": "^3.6.1",
     "vitest": "^3.2.4"
   }
 }

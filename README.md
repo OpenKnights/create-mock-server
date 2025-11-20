@@ -6,6 +6,10 @@
 
 A lightweight, flexible mock server library built on top of **H3** framework. Create realistic HTTP mock servers with minimal configuration for rapid API development, testing, and prototyping.
 
+> ⚠️ This repository has been archived.
+> 
+> The project has moved to [better-mock-server](https://github.com/OpenKnights/better-mock-server), where all future updates will be maintained.
+
 ## ✨ Features
 
 - 🏗️ **H3 Framework** - Built on the modern, universal H3 framework
